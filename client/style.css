@@ -82,11 +82,23 @@ a:before {
     position: absolute;
     left:0; bottom:0; top:0;
     width: 20px;
-    background: #7F8C9A;
+    background: black;
 }
 
 a:nth-child(even):before {
-    background: #34495E;
+    background: #99004C;
+}
+
+#uber {
+    background : rgb(55,52,52);
+    color: white;
+    font: 115% bold;
+}
+
+#lyft {
+    background: rgb(234,11,140);
+    color: white;
+    font: 115% bold;
 }
 
 a + a {
