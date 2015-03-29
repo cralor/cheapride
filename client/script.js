@@ -14,40 +14,35 @@ var componentForm = {
 function initialize() {
   // Create the autocomplete object, restricting the search
   // to geographical location types.
-  autocomplete = new google.maps.places.Autocomplete(
-      /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+  from_address = new google.maps.places.Autocomplete(
+      /** @type {HTMLInputElement} */(document.getElementById('from_address')),
       { types: ['geocode'] });
+    to_address = new google.maps.places.Autocomplete(
+        /** @type {HTMLInputElement} */(document.getElementById('to_address')),
+        { types: ['geocode'] });
   // When the user selects an address from the dropdown,
   // populate the address fields in the form.
-  google.maps.event.addListener(autocomplete, 'place_changed', function() {
-    fillInAddress();
+  google.maps.event.addListener(from_address, 'place_changed', function() {
+    sendLocationData(from_address);
   });
+    google.maps.event.addListener(to_address, 'place_changed', function() {
+        sendLocationData(to_address);
+    });
 }
 
 // [START region_fillform]
-function fillInAddress() {
+function sendLocationData(object) {
   // Get the place details from the autocomplete object.
-  var place = autocomplete.getPlace();
-
-  for (var component in componentForm) {
-    document.getElementById(component).value = '';
-    document.getElementById(component).disabled = false;
-  }
+  var place = object.getPlace();
 
   // Get each component of the address from the place details
   // and fill the corresponding field on the form.
-  for (var i = 0; i < place.address_components.length; i++) {
-    var addressType = place.address_components[i].types[0];
-    if (componentForm[addressType]) {
-      var val = place.address_components[i][componentForm[addressType]];
-      document.getElementById(addressType).value = val;
-    }
-  }
+  // TODO new shit here
 }
 // [END region_fillform]
 
 // [START region_geolocation]
-// Bias the autocomplete object to the user's geographical location,
+// Bias the from_address object to the user's geographical location,
 // as supplied by the browser's 'navigator.geolocation' object.
 function geolocate() {
   if (navigator.geolocation) {
@@ -58,7 +53,7 @@ function geolocate() {
         center: geolocation,
         radius: position.coords.accuracy
       });
-      autocomplete.setBounds(circle.getBounds());
+      from_address.setBounds(circle.getBounds());
     });
   }
 }

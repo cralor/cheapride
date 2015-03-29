@@ -18,37 +18,13 @@
   </head>
 
   <body onload="initialize()">
-    <div id="locationField">
-      <input id="autocomplete" placeholder="Enter your address"
-             onFocus="geolocate()" type="text"></input>
-    </div>
-
-    <table id="address">
-      <tr>
-        <td class="label">Street address</td>
-        <td class="slimField"><input class="field" id="street_number"
-              disabled="true"></input></td>
-        <td class="wideField" colspan="2"><input class="field" id="route"
-              disabled="true"></input></td>
-      </tr>
-      <tr>
-        <td class="label">City</td>
-        <td class="wideField" colspan="3"><input class="field" id="locality"
-              disabled="true"></input></td>
-      </tr>
-      <tr>
-        <td class="label">State</td>
-        <td class="slimField"><input class="field"
-              id="administrative_area_level_1" disabled="true"></input></td>
-        <td class="label">Zip code</td>
-        <td class="wideField"><input class="field" id="postal_code"
-              disabled="true"></input></td>
-      </tr>
-      <tr>
-        <td class="label">Country</td>
-        <td class="wideField" colspan="3"><input class="field"
-              id="country" disabled="true"></input></td>
-      </tr>
-    </table>
+      <div class="form">
+          <h1>Find your CheapRide.</h1>
+          <form method="post">
+              <input id="from_address" type="text" name="f" placeholder="From Address" required="required" onfocus="geolocate()"/>
+              <input id="to_address" type="test" name="t" placeholder="To Address" required="required" onfocus="geolocate()"/>
+              <button type="submit" class="btn btn-primary btn-block btn-large">Let's go!</button>
+          </form>
+      </div>
   </body>
 </html>
