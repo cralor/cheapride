@@ -27,7 +27,7 @@ body {
 }
 .form {
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 50%;
     margin: -150px 0 0 -150px;
     width:300px;
@@ -63,17 +63,20 @@ a, a:before {
 list {
     max-width: 300px;
     margin: 2em auto;
-    top: 70%;
-    left: 50%;
+    /*top: 70%;
+    left: 50%;*/
 }
+
 list:hover a {
     opacity: .4;
 }
+
 a {
     position: relative;
+    left: 32%;
     display: block;
     max-width: 500px;
-    padding: 20px 20px 20px 45px;
+    padding: 30px 20px 20px 45px;
     box-sizing: border-box;
     color: #777;
     background: #fAfAfA;
@@ -90,9 +93,11 @@ a:before {
 a:nth-child(even):before {
     background: #34495E;
 }
+
 a + a {
     border-top: 2px solid #ededed;
 }
+
 list a:hover,
 list a:focus {
     opacity: 1;
@@ -101,4 +106,8 @@ list a:focus {
 list a:hover:before,
 list a:focus:before {
     width: 30px;
+}
+#result {
+    margin-top: 400px;
+}
 }
