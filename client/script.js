@@ -20,24 +20,33 @@ function initialize() {
     to_address = new google.maps.places.Autocomplete(
         /** @type {HTMLInputElement} */(document.getElementById('to_address')),
         { types: ['geocode'] });
-  // When the user selects an address from the dropdown,
-  // populate the address fields in the form.
-  google.maps.event.addListener(from_address, 'place_changed', function() {
-    sendLocationData(from_address);
-  });
-    google.maps.event.addListener(to_address, 'place_changed', function() {
-        sendLocationData(to_address);
-    });
 }
 
 // [START region_fillform]
-function sendLocationData(object) {
+function sendLocationData(from_address, to_address) {
   // Get the place details from the autocomplete object.
-  var place = object.getPlace();
+  var from_place = from_address.getPlace();
+    var to_place = to_address.getPlace();
 
   // Get each component of the address from the place details
   // and fill the corresponding field on the form.
-  // TODO new shit here
+  var from_lng = from_place.geometry.location.getLng();
+    var from_lat = from_place.geometry.location.getLat();
+    var to_lng = to_place.geometry.location.getLng();
+    var to_lat = to_place.geometry.location.getLat();
+
+    $.ajax({
+        url: "http://localhost:3000/getUberData",
+        data: {
+            fromLng: from_lng,
+            fromLat: from_lat,
+            toLng: to_lng,
+            toLat: to_lat
+        },
+        success: function( data ) {
+            $("a#uber").attr("href", "").html( "" );
+        }
+    });
 }
 // [END region_fillform]
 
