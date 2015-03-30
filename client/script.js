@@ -1,6 +1,8 @@
 function initialize() {
   // Create the autocomplete object, restricting the search
   // to geographical location types.
+    console.log("javascript loaded successfully.");
+
   from_address = new google.maps.places.Autocomplete(
       /** @type {HTMLInputElement} */(document.getElementById('from_address')),
       { types: ['geocode'] });
@@ -22,17 +24,20 @@ function sendLocationData(from_address, to_address) {
     var to_lng = to_place.geometry.location.getLng();
     var to_lat = to_place.geometry.location.getLat();
 
+    console.log("from long: " + from_lng);
+    console.log("from lat: " + from_lat);
+    console.log("to long: " + to_lng);
+    console.log("to lat: " + to_lat);
+
     $.ajax({
-        url: "http://localhost:3000/getUberData",
+        url: "localhost:3000/getUberData",
         data: {
             fromLng: from_lng,
             fromLat: from_lat,
             toLng: to_lng,
             toLat: to_lat
         },
-        success: function( data ) {
-            $("a#uber").attr("href", "").html( "" );
-        }
+        success: setupUberResults
     });
 }
 // [END region_fillform]
@@ -54,3 +59,7 @@ function geolocate() {
   }
 }
 // [END region_geolocation]
+
+function setupUberResults( data ) {
+    $("a#uber").attr("href", "#").html( "<strong><em>Uber</em></strong>: " + data.price + " ETA: " + data.eta + " TTA: " + data.total_time );
+}

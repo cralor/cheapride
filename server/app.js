@@ -3,6 +3,10 @@ var app = express();
 var bodyParser = require('body-parser');
 var multer = require('multer');
 
+var version = "v0.1";
+
+console.log("CheapRide app loaded. Running " + version + ". Have fun!");
+
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use(multer()); // for parsing multipart/form-data
@@ -59,7 +63,7 @@ app.get('/getUberData', function (req, res) {
             if (priceError || etaError) {
                 res.end(500);
             } else {
-                var response = JSON.stringify({ "price": "$"+price.toFixed(2), "trip_length": length, "total_time:": length+eta, "distance": distance});
+                var response = JSON.stringify({ "price": "$"+price.toFixed(2), "eta": eta, "total_time:": length+eta, "distance": distance});
                 console.log(response);
                 res.end(response);
             }

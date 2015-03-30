@@ -22,10 +22,10 @@
   <body onload="initialize()">
       <div class="form">
           <h1>Find your CheapRide.</h1>
-          <form method = "post" action = "results.html">
-              <input id="from_address" type="text" name="f" placeholder="From Address" required="required" onfocus="geolocate()"/>
-              <input id="to_address" type="test" name="t" placeholder="To Address" required="required"/>
-              <button type="submit" class="btn btn-primary btn-block btn-large" onsubmit="sendLocationData(from_address, to_address)">Let's go!</button>
+          <form action = "results.html">
+              <input id="from_address" type="text" placeholder="From address" required="required" onfocus="geolocate()"/>
+              <input id="to_address" type="text" placeholder="To address" required="required"/>
+              <button id="form_button" type="submit" class="btn btn-primary btn-block btn-large" onclick="sendLocationData(document.getElementById(from_address).value, document.getElementById(to_address).value)">Let's go!</button>
           </form>
       </div>
   </body>
